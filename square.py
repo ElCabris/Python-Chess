@@ -15,23 +15,14 @@ class Square:
         # objeto de tipo pygame.Rect que representa la casilla
         self.square = pygame.Rect(self.pos[0], self.pos[1], self.size_square[0], self.size_square[1])
         # objeto de tipo Surface
-        self.__piece = piece
-
-    @property
-    def piece(self):
-        return self.__piece
-
-    @piece.setter
-    def piece(self, piece):
-        self.__piece = piece
-
+        self.piece = piece
 
     def draw(self, screen_to_draw):
         """esta función dibuja en la pantalla la casilla seleccionada"""
         pygame.draw.rect(screen_to_draw, self.color, self.square)
-        if self.__piece is not None:
-            self.__piece = pygame.transform.scale(self.__piece, self.size_square)
-            screen_to_draw.blit(self.__piece, self.pos)
+        if self.piece is not None:
+            self.piece = pygame.transform.scale(self.piece, self.size_square)
+            screen_to_draw.blit(self.piece, self.pos)
         pygame.display.update()
 
 
@@ -51,3 +42,25 @@ def color_square(fil, column, color1=(255, 255, 255), color0=(0, 0, 0)):
             return color0
         else:
             return color1
+
+
+def algebraic_to_sqscreen(coo_algebraic):
+    # coo_algebraic es una tupla de la forma (str, int)
+    coo_algebraic[1] = 8 - coo_algebraic[1]
+    fil = {
+        'a': 0,
+        'b': 1,
+        'c': 2,
+        'd': 3,
+        'e': 4,
+        'f': 5,
+        'g': 6,
+        'h': 7,
+    }
+
+    coo_algebraic[0] = fil[coo_algebraic[0]]
+
+    return (coo_algebraic[1], coo_algebraic[0])
+
+
+

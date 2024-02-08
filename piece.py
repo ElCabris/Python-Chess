@@ -110,3 +110,34 @@ def init_pos(fil, col, size):
         return Queen(color, pos, size)
     elif col == 4:
         return King(color, pos, size)
+
+
+def piece_class(letter):
+    letter = letter.lower()
+    diccionario = {
+        'k': King,
+        'q': Queen,
+        'n': Knight,
+        'r': Rook,
+        'p': Pawn,
+        'b': Bishop,
+    }
+    return diccionario.get(letter, None)
+
+
+def is_a_piece(diccionario, clave, piece=None):
+    """busca saber si existe alguna pieza en la casilla indicada
+    el diccionario va a tener las posiciones de las piezas
+    clave es para el diccionario
+    piece es para verificar si los tipos de piezas coinciden, si no se ingresa este parámetro entonces solo se verífica
+    si existe ese valor en el diccionario"""
+    if diccionario[tuple(clave)] == None:
+        return False
+    else:
+        if piece is None:
+            return True
+        else:
+            if isinstance(diccionario[clave], piece):
+                return True
+            else:
+                return False
